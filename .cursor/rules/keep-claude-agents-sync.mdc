@@ -1,0 +1,13 @@
+---
+description: Keep CLAUDE.md and AGENTS.md identical on every change
+alwaysApply: true
+---
+
+# Sync Claude and Cursor memory
+
+`CLAUDE.md` (Claude Code) and `AGENTS.md` (Cursor) are the same document.
+
+- Any edit to one **must** be applied to the other in the same operation.
+- They must remain byte-for-byte identical (do not add a Cursor-only or Claude-only paragraph).
+- Role/gate changes: update `docs/ROLES.md` and the README **Roles** section in that same change.
+- Do not skip this because the change was "small."

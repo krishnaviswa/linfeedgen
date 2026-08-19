@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: #12110f;
+  color: #f2efe7;
+  min-height: 100%;
+}
+
+body {
+  font-feature-settings: "ss01", "kern";
+}
+
+::selection {
+  background: #c4a574;
+  color: #12110f;
+}
+
+input,
+textarea,
+button,
+select {
+  font: inherit;
+}
+
+.poster-scale {
+  transform-origin: top center;
+}

@@ -1,0 +1,17 @@
+---
+description: Studio roles — Creator, Validator, Designer, Tester, Publisher, Platform
+alwaysApply: true
+---
+
+# Roles
+
+Full checklists: `docs/ROLES.md`. Same rules in `CLAUDE.md` / `AGENTS.md`.
+
+- **Content Creator:** sourced trend, 2–3 poster variants, caption. No approve/publish. No invented news.
+- **Validator:** source URL, fail-closed JSON, approve-only LinkedIn. No scrape, no comment bots, no auto-post if silent.
+- **Designer:** HTML templates draw posters; Playwright PNG on demand then exit. No AI-painted architecture.
+- **Tester:** prove login → ingest → generate → export → approve/reject; do not ship without the approve gate.
+- **Publisher:** copy PNG+caption, or OAuth cron for `approved` only. No likes/comments/DMs.
+- **Platform:** `completePoster()` adapter (Gemini Flash default). Railway spend cap. No Redis/n8n/vector/agents.
+
+Never import a vendor LLM SDK in generate routes. `LLM_PROVIDER` switches models.
