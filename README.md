@@ -92,6 +92,8 @@ The adapter contract is `completePoster(input) → PosterJson`. Bad JSON **fails
 
 ## Railway
 
+Step-by-step: [`docs/RAILWAY.md`](docs/RAILWAY.md).
+
 1. New project → this repo.
 2. Add **PostgreSQL**. Railway sets `DATABASE_URL`.
 3. Add a **volume** mounted at `/data`. Set `DATA_DIR=/data`.
@@ -117,5 +119,6 @@ Wasted money this repo avoids: always-on Chrome, painting diagrams with image mo
 ## Docs for agents
 
 - [`docs/ROLES.md`](docs/ROLES.md) — Creator, Validator, Designer, Tester, Publisher, Platform
+- [`docs/RAILWAY.md`](docs/RAILWAY.md) — deploy, env, spend cap, cron
 - [`CLAUDE.md`](CLAUDE.md) / [`AGENTS.md`](AGENTS.md) — same file; keep in lockstep on every operation
 - [`.cursor/rules/`](.cursor/rules/) — Cursor always-on rules (sync + roles)

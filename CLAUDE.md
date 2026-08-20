@@ -35,6 +35,7 @@ Post order: Platform ingest → Creator → Designer → Validator → Tester �
 - Publish guard: `src/lib/linkedin/publish.ts` → `publishApprovedDraft`
 - Ingest: `src/lib/feeds/ingest.ts` (public RSS/HN/arXiv only)
 - Auth: one-user `APP_PASSWORD`
+- Railway: [`docs/RAILWAY.md`](docs/RAILWAY.md)
 
 ## Every operation checklist
 
