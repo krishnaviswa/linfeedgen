@@ -76,7 +76,7 @@ Canonical copy lives here. `CLAUDE.md` and `AGENTS.md` must match each other. RE
 
 - Ship without checking the approve gate.
 
-**Done when:** local path works without Postgres; Railway path documented for `DATABASE_URL` + volume.
+**Done when:** local path works without Postgres; Railway free path is SQLite on `/data` (see `docs/RAILWAY.md`).
 
 ## Publisher (needed)
 
@@ -99,8 +99,7 @@ Canonical copy lives here. `CLAUDE.md` and `AGENTS.md` must match each other. RE
 **Does**
 
 - LLM adapter: `completePoster(input) → PosterJson`. New Chinese/other models = new file under `providers/` + env.
-- Railway: web + Postgres + `/data` volume + **spend cap $15–25**.
-- SQLite locally when `DATABASE_URL` is unset.
+- Railway: web + volume `/data` + **spend cap $15–25**. SQLite if `DATABASE_URL` unset. Optional Neon/Supabase Postgres later.
 - No Redis, n8n-as-app, vector DB, or agents in v1.
 
 ---

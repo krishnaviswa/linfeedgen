@@ -24,7 +24,7 @@ When roles or product gates change, update `docs/ROLES.md`, this section, `CLAUD
 ## Stack
 
 - Next.js App Router
-- SQLite locally, Postgres on Railway (`DATABASE_URL`)
+- SQLite by default (local and Railway free). Optional Postgres via `DATABASE_URL` (Neon/Supabase — not Railway’s plugin).
 - One-user password auth
 - LLM **adapter** (default Gemini Flash). Generate routes never import a vendor SDK.
 - HTML/CSS poster templates (story / process / versus / stats / architecture)
@@ -59,7 +59,7 @@ If `DATABASE_URL` is unset, SQLite is created at `./data/studio.db` via Node's b
 | `LLM_PROVIDER` | no | Default `gemini`. Later: `deepseek`, `qwen`, `openrouter` |
 | `LLM_MODEL` | no | Provider default if omitted |
 | `LLM_BASE_URL` | no | Override API host |
-| `DATABASE_URL` | Railway | `postgres://…` → Postgres; omit → SQLite |
+| `DATABASE_URL` | no | Omit → SQLite. `postgres://…` → Neon/Supabase/etc. |
 | `DATA_DIR` | no | Default `./data`. Mount a Railway volume here |
 | `CRON_SECRET` | Railway cron | Bearer / `x-cron-secret` / `?secret=` |
 | `LINKEDIN_CLIENT_ID` | optional | Copy-paste export works without LinkedIn |
@@ -92,15 +92,14 @@ The adapter contract is `completePoster(input) → PosterJson`. Bad JSON **fails
 
 ## Railway
 
-Step-by-step: [`docs/RAILWAY.md`](docs/RAILWAY.md).
+Step-by-step: [`docs/RAILWAY.md`](docs/RAILWAY.md). Why (architecture): [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 1. New project → this repo.
-2. Add **PostgreSQL**. Railway sets `DATABASE_URL`.
-3. Add a **volume** mounted at `/data`. Set `DATA_DIR=/data`.
-4. Deploy with the included `Dockerfile` (Playwright base image so Chromium exists on disk; the app still only launches it during PNG export).
-5. Set env vars from the table above. `APP_URL` = your public `https://…up.railway.app`.
-6. **Spend cap:** Project → Settings → Usage → **Spend Limit**. Hobby includes **$5** usage. Cap at **$15–25**. This studio should sit ~$10–25/mo (web + Postgres + Gemini Flash), not Taplio money.
-7. Two HTTP cron jobs (Authorization: `Bearer $CRON_SECRET`):
+2. **Skip Railway Postgres** (often blocked on free). Leave `DATABASE_URL` unset. Add a **volume** at `/data` and set `DATA_DIR=/data` (SQLite + PNGs). See [`docs/RAILWAY.md`](docs/RAILWAY.md).
+3. Deploy with the included `Dockerfile` (Playwright base image so Chromium exists on disk; the app still only launches it during PNG export).
+4. Set env vars from the table above. `APP_URL` = your public `https://…up.railway.app`.
+5. **Spend cap:** Project → Settings → Usage → **Spend Limit**. Hobby includes **$5** usage. Cap at **$15–25**.
+6. Two HTTP cron jobs (Authorization: `Bearer $CRON_SECRET`):
    - Daily ingest: `GET/POST https://<app>/api/cron/ingest`
    - After you approve: `GET/POST https://<app>/api/cron/publish` (no-ops if nothing is approved or LinkedIn is disconnected)
 
@@ -119,6 +118,7 @@ Wasted money this repo avoids: always-on Chrome, painting diagrams with image mo
 ## Docs for agents
 
 - [`docs/ROLES.md`](docs/ROLES.md) — Creator, Validator, Designer, Tester, Publisher, Platform
-- [`docs/RAILWAY.md`](docs/RAILWAY.md) — deploy, env, spend cap, cron
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — end-to-end flow and Railway (why each setting exists)
+- [`docs/RAILWAY.md`](docs/RAILWAY.md) — deploy click list
 - [`CLAUDE.md`](CLAUDE.md) / [`AGENTS.md`](AGENTS.md) — same file; keep in lockstep on every operation
 - [`.cursor/rules/`](.cursor/rules/) — Cursor always-on rules (sync + roles)

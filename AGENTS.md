@@ -23,7 +23,7 @@ When implementing, name the role you are acting as. Do not skip **Validator**.
 | **Designer** | `src/lib/posters/html.ts`, on-demand Playwright PNG | Always-on Chrome, AI-painted labels |
 | **Tester** | Login → ingest → generate → export → approve/reject; build | Ship without the approve gate |
 | **Publisher** | PNG+caption copy; LinkedIn OAuth cron for approved only | Likes/comments/DMs |
-| **Platform** | Adapter, Railway+spend cap, SQLite local / Postgres prod | Redis, n8n-as-app, vector DB, agents |
+| **Platform** | Adapter, Railway+spend cap, SQLite (volume) / optional Neon Postgres | Redis, n8n-as-app, vector DB, agents |
 
 Post order: Platform ingest → Creator → Designer → Validator → Tester → **human Approve** → Publisher.
 
@@ -35,7 +35,7 @@ Post order: Platform ingest → Creator → Designer → Validator → Tester �
 - Publish guard: `src/lib/linkedin/publish.ts` → `publishApprovedDraft`
 - Ingest: `src/lib/feeds/ingest.ts` (public RSS/HN/arXiv only)
 - Auth: one-user `APP_PASSWORD`
-- Railway: [`docs/RAILWAY.md`](docs/RAILWAY.md)
+- Railway: [`docs/RAILWAY.md`](docs/RAILWAY.md), flow: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 
 ## Every operation checklist
 
